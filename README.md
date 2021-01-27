@@ -18,6 +18,11 @@ ppkg bananas bananas bananas
 
 * ppkg then generates Markdown files (`*.md`) to be presented using [`reveal-md`](https://github.com/webpro/reveal-md)
 
+## Inspiration
+
+* [SCIgen](https://pdos.csail.mit.edu/archive/scigen/)
+* [Chicken Chicken Chicken](https://www.slideshare.net/dakami/chicken-59851061)
+
 ## [Diversifiers](https://globalgamejam.org/news/ggj-online-diversifiers)
 
 Got plenty:
