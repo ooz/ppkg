@@ -1,2 +1,4 @@
-# ppkg
-GGJ21 "???" entry: generate PowerPoint Karoke slide decks! 
+# Pompous Presentation Karaoke Generator
+
+Lost your slide deck?
+Luckily you found PPKG!
