@@ -1,7 +1,20 @@
 # Pompous Presentation Karaoke Generator
 
-Lost your slide deck?
-Luckily you found PPKG!
+*Lost your slide deck? Luckily you found PPKG!*
+
+PPKG is a "PowerPoint Karaoke" generator generating slide decks from up to three passed topics.
+
+## Features
+
+PPKG generates slide decks with 10-20 slides (can be configured in the script). Possible slide types generated:
+
+* Title slide
+* Motivation/key-argument slide (few words, maybe big background image?)
+* Agenda slide
+* Slide with lists and bullet points
+* Slide with lots of text
+* Slide with some chart
+* Slide with references, literature, links
 
 ## Usage
 
@@ -17,6 +30,11 @@ ppkg bananas bananas bananas
 ```
 
 * ppkg then generates Markdown files (`*.md`) to be presented using [`reveal-md`](https://github.com/webpro/reveal-md)
+
+```bash
+# Use reveal-md to run your presentation
+reveal-md generated-slides.md
+```
 
 ## Inspiration
 
