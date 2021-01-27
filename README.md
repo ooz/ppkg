@@ -49,7 +49,7 @@ Got plenty:
 * **Kitchen sink**: play with keyboard, mouse, controller, or any other presenting device!
 * **RNG**: entire content and texts are randomized!
 * **Murphy's Law**: that's the fun of PPK!
-* **Fake News**: the generated presentations are fake and disinformation!
+* **Fake News**: the generated presentations are fake, disinformation and full of bullshit!
 * **On the safe side**: made Corona-safe, alone!
 * **A-Party**: yes, you can have a PPK during a video call!
 * **Next Slide Please**: the game is a presentation!
