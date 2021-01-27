@@ -16,6 +16,17 @@ PPKG generates slide decks with 10-20 slides (can be configured in the script). 
 * Slide with some chart
 * Slide with references, literature, links
 
+## Installation
+
+1. Make sure you have Python 3 installed
+2. Copy `ppkg` script to the directory you want to generate your slides in or
+3. Put `ppkg` script on your PATH
+4. Make sure the script is executable
+
+```
+chmod +x ppkg
+```
+
 ## Usage
 
 ```bash
