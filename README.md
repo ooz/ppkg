@@ -18,7 +18,16 @@ ppkg bananas bananas bananas
 
 * ppkg then generates Markdown files (`*.md`) to be presented using [`reveal-md`](https://github.com/webpro/reveal-md)
 
-## Diversifiers
+## [Diversifiers](https://globalgamejam.org/news/ggj-online-diversifiers)
 
-Plenty!
+Got plenty:
+
+* **Destination: Happy Place**: the entire point of PPK is to have lots of laughs!
+* **Kitchen sink**: play with keyboard, mouse, controller, or any other presenting device!
+* **RNG**: entire content and texts are randomized!
+* **Murphy's Law**: that's the fun of PPK!
+* **Fake News**: the generated presentations are fake and disinformation!
+* **On the safe side**: made Corona-safe, alone!
+* **A-Party**: yes, you can have a PPK during a video call!
+* **Next Slide Please**: the game is a presentation!
 
