@@ -16,9 +16,7 @@ ppkg mango universe study
 ppkg bananas bananas bananas
 ```
 
-## How it works
-
-* ppkg generates Markdown files to be presented using `reveal-md`
+* ppkg then generates Markdown files (`*.md`) to be presented using [`reveal-md`](https://github.com/webpro/reveal-md)
 
 ## Diversifiers
 
