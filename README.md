@@ -54,13 +54,13 @@ chmod +x ppkg
 
 ```bash
 # Generate this README
-ppkg ppkg ppkg
+ppkg ppkg ppkg > README.md
 
 # To generate a "chicken chicken chicken" slide deck, use the same topic three times
-ppkg bananas bananas bananas
+ppkg bananas bananas bananas > slides.md
 
 # Generate a slide deck about max. 3 topics
-ppkg mango universe study
+ppkg mango universe study > slides.md
 ```
 
 * ppkg then generates Markdown files (`*.md`) to be presented using [`reveal-md`](https://github.com/webpro/reveal-md)
