@@ -1,8 +1,23 @@
+---
+title: "Pompous Presentation Karaoke Generator"
+separator: <!--s-->
+verticalSeparator: <!--v-->
+theme: white
+revealOptions:
+    controls: true
+    transition: 'none'
+    slideNumber: 'c/t'
+---
+
 # Pompous Presentation Karaoke Generator
 
 *Lost your slide deck? Luckily you found PPKG!*
 
+<!--s-->
+
 PPKG is a "PowerPoint Karaoke" generator generating slide decks from up to three passed topics.
+
+<!--s-->
 
 ## Features
 
@@ -16,6 +31,8 @@ PPKG generates slide decks with 10-20 slides (can be configured in the script). 
 * Slide with some chart
 * Slide with references, literature, links
 
+<!--s-->
+
 ## Installation
 
 1. Make sure you have Python 3 installed
@@ -26,6 +43,8 @@ PPKG generates slide decks with 10-20 slides (can be configured in the script). 
 ```
 chmod +x ppkg
 ```
+
+<!--s-->
 
 ## Usage
 
@@ -47,21 +66,32 @@ ppkg bananas bananas bananas
 reveal-md generated-slides.md
 ```
 
+<!--s-->
+
 ## Inspiration
 
 * [SCIgen](https://pdos.csail.mit.edu/archive/scigen/)
 * [Chicken Chicken Chicken](https://www.slideshare.net/dakami/chicken-59851061)
 
-## [Diversifiers](https://globalgamejam.org/news/ggj-online-diversifiers)
+<!--s-->
 
-Got plenty:
+## [Diversifiers](https://globalgamejam.org/news/ggj-online-diversifiers)
 
 * **Destination: Happy Place**: the entire point of PPK is to have lots of laughs!
 * **Kitchen sink**: play with keyboard, mouse, controller, or any other presenting device!
 * **RNG**: entire content and texts are randomized!
 * **Murphy's Law**: that's the fun of PPK!
+
+<!--v-->
+
 * **Fake News**: the generated presentations are fake, disinformation and full of bullshit!
 * **On the safe side**: made Corona-safe, alone!
 * **A-Party**: yes, you can have a PPK during a video call!
 * **Next Slide Please**: the game is a presentation!
 
+<style>
+.reveal .slidebackground {
+  background: no-repeat center center fixed;
+  background-size: cover; /* `contain` works nicely as well */
+}
+</style>
