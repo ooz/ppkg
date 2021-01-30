@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import os
 import random
 import sys
 import time
@@ -9,7 +10,8 @@ import time
 CONFIGURATION = {
     'theme': None,
     'transition': None,
-    'seed': int(time.time())
+    'seed': int(time.time()),
+    'pexels_api_key': os.getenv('PEXELS_API_KEY', '')
 }
 
 EXTRA_STYLE = '''
@@ -55,9 +57,10 @@ def slide(content, vertical=False, last=False):
 '''
     return s.strip() + '\n'
 
-def bullets(lines, ordered=False):
+def bullets(lines, ordered=False, fragments=False):
     list_type = '1.' if ordered else '*'
-    lines = [f'{list_type} {line}' for line in lines]
+    fragment = ' <!-- .element: class="fragment" --> ' if fragments else ' '
+    lines = [f'{list_type}{fragment}{line}' for line in lines]
     return '\n'.join(lines)
 
 def intro(title, slogan=None, author_coordinates=None):
@@ -137,7 +140,8 @@ def generateChickenChickenChicken(topic):
     title = ' '.join(title)
     meta_block = meta(title)
     slides = [
-        slide(intro(title))
+        slide(intro(title)),
+        slide(bullets([topic] * 5, True, True))
     ]
     slides = '\n'.join(slides)
     return meta_block + '\n' + slides
