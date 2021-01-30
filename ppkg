@@ -3,6 +3,12 @@
 
 import sys
 
+# Configure the generator here, any property set to None will be randomized
+CONFIGURATION = {
+    'theme': None,
+    'transition': None
+}
+
 def meta(title, theme=None, transition=None):
     themes = ['beige', 'black', 'blood', 'league', 'moon', 'night', 'serif', 'simple', 'sky', 'solarized', 'white']
     transitions = ['none', 'fade', 'slide', 'convex', 'concave', 'zoom']
