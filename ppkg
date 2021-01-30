@@ -9,6 +9,15 @@ CONFIGURATION = {
     'transition': None
 }
 
+EXTRA_STYLE = '''
+<style>
+.reveal .slidebackground {
+  background: no-repeat center center fixed;
+  background-size: cover; /* `contain` works nicely as well */
+}
+</style>
+'''
+
 def meta(title, theme=None, transition=None):
     themes = ['beige', 'black', 'blood', 'league', 'moon', 'night', 'serif', 'simple', 'sky', 'solarized', 'white']
     transitions = ['none', 'fade', 'slide', 'convex', 'concave', 'zoom']
@@ -25,13 +34,19 @@ revealOptions:
 ---
 '''
 
-def slide(content, vertical=False):
+def slide(content, vertical=False, last=False):
     slide_type = 'v' if vertical else 's'
-    return \
-f'''{content}
+    slide_type = '' if last else f'<!--{slide_type}-->'
+    s = f'''{content}
 
-<!--{slide_type}-->
+{slide_type}
 '''
+    return s.strip() + '\n'
+
+def bullets(lines, ordered=False):
+    list_type = '1.' if ordered else '*'
+    lines = [f'{list_type} {line}' for line in lines]
+    return '\n'.join(lines)
 
 def intro(title, slogan=None, author_coordinates=None):
     lower_part = ''
@@ -52,10 +67,61 @@ def generateReadmePresentation():
     meta_block = meta(title, 'white', 'slide')
     slides = [
         slide(intro(title, slogan)),
-        slide('PPKG is a "PowerPoint Karaoke" generator generating slide decks from up to three passed topics.')
+        slide('''## Inspiration
+
+* [SCIgen](https://pdos.csail.mit.edu/archive/scigen/)
+* [Chicken Chicken Chicken](https://www.slideshare.net/dakami/chicken-59851061)
+
+PPKG is a "PowerPoint Karaoke" generator composing slide decks from up to three passed topics.'''),
+        slide(f'''## Features
+
+PPKG generates slide decks with 10-20 slides (can be configured in the script). Possible slide types generated:
+
+{bullets(['Title slide', 'Motivation/key-argument slide (few words, maybe big background image?)', 'Agenda slide', 'Slide with lists and bullet points', 'Slide with lots of text', 'Slide with some chart, references, literature, links'])}'''),
+        slide(f'''## Installation
+
+{bullets(['Make sure you have Python 3 installed', 'Copy `ppkg` script to the directory you want to generate your slides in or', 'Put `ppkg` script on your PATH', 'Make sure the script is executable'], True)}
+
+```
+chmod +x ppkg
+```'''),
+        slide('''## Usage
+
+```bash
+# Generate this README
+ppkg ppkg ppkg
+
+# To generate a "chicken chicken chicken" slide deck, use the same topic three times
+ppkg bananas bananas bananas
+
+# Generate a slide deck about max. 3 topics
+ppkg mango universe study
+```
+
+* ppkg then generates Markdown files (`*.md`) to be presented using [`reveal-md`](https://github.com/webpro/reveal-md)
+
+```bash
+# Use reveal-md to run your presentation
+reveal-md generated-slides.md
+# Or use the provided Makefile and Docker
+make dockerRun
+```'''),
+        slide('''## [Diversifiers](https://globalgamejam.org/news/ggj-online-diversifiers)
+
+* **Destination: Happy Place**: the entire point of PPK is to have lots of laughs!
+* **Kitchen sink**: play with keyboard, mouse, controller, or any other presenting device!
+* **RNG**: entire content and texts are randomized!
+* **Murphy's Law**: that's the fun of PPK!''', True),
+        slide('''* **Fake News**: the generated presentations are fake, disinformation and full of bullshit!
+* **On the safe side**: made Corona-safe, alone!
+* **A-Party**: yes, you can have a PPK during a video call!
+* **Next Slide Please**: the game is a presentation!''', False, True)
     ]
     slides = '\n'.join(slides)
-    return meta_block + '\n' + slides
+    content = meta_block + '\n' + slides
+    if EXTRA_STYLE:
+        content += EXTRA_STYLE
+    return content
 
 def generateChickenChickenChicken(topic):
     return ''
