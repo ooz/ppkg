@@ -1,0 +1,77 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+
+import sys
+
+def meta(title, theme=None, transition=None):
+    themes = ['beige', 'black', 'blood', 'league', 'moon', 'night', 'serif', 'simple', 'sky', 'solarized', 'white']
+    transitions = ['none', 'fade', 'slide', 'convex', 'concave', 'zoom']
+    return \
+f'''---
+title: "{title}"
+separator: <!--s-->
+verticalSeparator: <!--v-->
+theme: {theme}
+revealOptions:
+    controls: true
+    transition: '{transition}'
+    slideNumber: 'c/t'
+---
+'''
+
+def slide(content, vertical=False):
+    slide_type = 'v' if vertical else 's'
+    return \
+f'''{content}
+
+<!--{slide_type}-->
+'''
+
+def intro(title, slogan=None, author_coordinates=None):
+    lower_part = ''
+    if slogan:
+        lower_part += f'*{slogan}*'
+    if author_coordinates:
+        lower_part += f'\n\n{author_coordinates}'
+    lower_part = lower_part.strip()
+    return \
+f'''# {title}
+
+{lower_part}'''
+
+
+def generateReadmePresentation():
+    title = 'Pompous Presentation Karaoke Generator'
+    slogan = 'Lost your slide deck? Luckily you found PPKG!'
+    meta_block = meta(title, 'white', 'slide')
+    slides = [
+        slide(intro(title, slogan)),
+        slide('PPKG is a "PowerPoint Karaoke" generator generating slide decks from up to three passed topics.')
+    ]
+    slides = '\n'.join(slides)
+    return meta_block + '\n' + slides
+
+def generateChickenChickenChicken(topic):
+    return ''
+
+def generatePresentation(topics):
+    return ''
+
+def main(args):
+    if len(args) < 1 or len(args) > 3:
+        print("Error: Please pass at least one topic and at most 3 topics separated by space!")
+        sys.exit(1)
+
+    markdown = ''
+    if args == ['ppkg', 'ppkg']:
+        markdown = generateReadmePresentation()
+    elif len(args) == 3 and args[0] == args[1] and args[1] == args[2]:
+        markdown = generateChickenChickenChicken(args[0])
+    else:
+        markdown = generatePresentation(args)
+
+    if markdown:
+        print(markdown)
+
+if __name__ == "__main__":
+    main(sys.argv[1:])

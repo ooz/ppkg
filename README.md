@@ -5,7 +5,7 @@ verticalSeparator: <!--v-->
 theme: white
 revealOptions:
     controls: true
-    transition: 'none'
+    transition: 'slide'
     slideNumber: 'c/t'
 ---
 
@@ -15,7 +15,12 @@ revealOptions:
 
 <!--s-->
 
-PPKG is a "PowerPoint Karaoke" generator generating slide decks from up to three passed topics.
+## Inspiration
+
+* [SCIgen](https://pdos.csail.mit.edu/archive/scigen/)
+* [Chicken Chicken Chicken](https://www.slideshare.net/dakami/chicken-59851061)
+
+PPKG is a "PowerPoint Karaoke" generator composing slide decks from up to three passed topics.
 
 <!--s-->
 
@@ -28,8 +33,7 @@ PPKG generates slide decks with 10-20 slides (can be configured in the script). 
 * Agenda slide
 * Slide with lists and bullet points
 * Slide with lots of text
-* Slide with some chart
-* Slide with references, literature, links
+* Slide with some chart, references, literature, links
 
 <!--s-->
 
@@ -52,11 +56,11 @@ chmod +x ppkg
 # Generate this README
 ppkg ppkg ppkg
 
-# Generate a slide deck about max. 3 topics
-ppkg mango universe study
-
 # To generate a "chicken chicken chicken" slide deck, use the same topic three times
 ppkg bananas bananas bananas
+
+# Generate a slide deck about max. 3 topics
+ppkg mango universe study
 ```
 
 * ppkg then generates Markdown files (`*.md`) to be presented using [`reveal-md`](https://github.com/webpro/reveal-md)
@@ -64,14 +68,9 @@ ppkg bananas bananas bananas
 ```bash
 # Use reveal-md to run your presentation
 reveal-md generated-slides.md
+# Or use the provided Makefile and Docker
+make dockerRun
 ```
-
-<!--s-->
-
-## Inspiration
-
-* [SCIgen](https://pdos.csail.mit.edu/archive/scigen/)
-* [Chicken Chicken Chicken](https://www.slideshare.net/dakami/chicken-59851061)
 
 <!--s-->
 
