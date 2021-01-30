@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 
+import random
 import sys
+import time
 
 # Configure the generator here, any property set to None will be randomized
 CONFIGURATION = {
     'theme': None,
-    'transition': None
+    'transition': None,
+    'seed': int(time.time())
 }
 
 EXTRA_STYLE = '''
@@ -18,9 +21,18 @@ EXTRA_STYLE = '''
 </style>
 '''
 
+THEMES = ['beige', 'black', 'blood', 'league', 'moon', 'night', 'serif', 'simple', 'sky', 'solarized', 'white']
+TRANSITIONS = ['none', 'fade', 'slide', 'convex', 'concave', 'zoom']
+
 def meta(title, theme=None, transition=None):
-    themes = ['beige', 'black', 'blood', 'league', 'moon', 'night', 'serif', 'simple', 'sky', 'solarized', 'white']
-    transitions = ['none', 'fade', 'slide', 'convex', 'concave', 'zoom']
+    if CONFIGURATION['theme']:
+        theme = CONFIGURATION['theme']
+    if CONFIGURATION['transition']:
+        theme = CONFIGURATION['transition']
+    if not theme:
+        theme = RNG.choice(THEMES)
+    if not transition:
+        transition = RNG.choice(TRANSITIONS)
     return \
 f'''---
 title: "{title}"
@@ -58,7 +70,7 @@ def intro(title, slogan=None, author_coordinates=None):
     return \
 f'''# {title}
 
-{lower_part}'''
+{lower_part}'''.strip()
 
 
 def generateReadmePresentation():
@@ -89,13 +101,13 @@ chmod +x ppkg
 
 ```bash
 # Generate this README
-ppkg ppkg ppkg
+ppkg ppkg ppkg > README.md
 
 # To generate a "chicken chicken chicken" slide deck, use the same topic three times
-ppkg bananas bananas bananas
+ppkg bananas bananas bananas > slides.md
 
 # Generate a slide deck about max. 3 topics
-ppkg mango universe study
+ppkg mango universe study > slides.md
 ```
 
 * ppkg then generates Markdown files (`*.md`) to be presented using [`reveal-md`](https://github.com/webpro/reveal-md)
@@ -118,16 +130,39 @@ make dockerRun
 * **Next Slide Please**: the game is a presentation!''', False, True)
     ]
     slides = '\n'.join(slides)
-    content = meta_block + '\n' + slides
-    if EXTRA_STYLE:
-        content += EXTRA_STYLE
-    return content
+    return meta_block + '\n' + slides
 
 def generateChickenChickenChicken(topic):
-    return ''
+    title = [topic] * 3
+    title = ' '.join(title)
+    meta_block = meta(title)
+    slides = [
+        slide(intro(title))
+    ]
+    slides = '\n'.join(slides)
+    return meta_block + '\n' + slides
 
 def generatePresentation(topics):
     return ''
+
+class Rng(object):
+    def __init__(self, seed):
+        super().__init__()
+        print(f'Seed: {seed}', file=sys.stderr)
+        self.values = range(1000)
+        self.rng = random.Random(seed)
+        self.values = [self.rng.random() for _ in self.values]
+        self.values = iter(self.values)
+
+    def choice(self, seq):
+        random_index = int(next(self.values) * len(seq))
+        return seq[random_index]
+
+    def random(self):
+        value = next(self.values)
+        return value
+
+RNG = Rng(CONFIGURATION['seed'])
 
 def main(args):
     if len(args) < 1 or len(args) > 3:
@@ -142,6 +177,8 @@ def main(args):
     else:
         markdown = generatePresentation(args)
 
+    if markdown and EXTRA_STYLE:
+        markdown += EXTRA_STYLE
     if markdown:
         print(markdown)
 
