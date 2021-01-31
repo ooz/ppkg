@@ -18,3 +18,4 @@ demo: ## Generates some demo slide decks
 	./ppkg developers developers developers > developers.md
 	./ppkg bananas bananas bananas > bananas.md
 	./ppkg mango universe study > slides.md
+	./ppkg apple cherry bananas > fruits.md
