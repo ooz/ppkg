@@ -26,7 +26,7 @@ PPKG is a "PowerPoint Karaoke" generator composing slide decks from up to three 
 
 ## Features
 
-PPKG generates slide decks with 10-20 slides (can be configured in the script). Possible slide types generated:
+PPKG generates slide decks. Possible slide types generated:
 
 * Title slide
 * Motivation/key-argument slide (few words, maybe big background image?)

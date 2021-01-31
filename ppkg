@@ -101,7 +101,7 @@ def generateReadmePresentation():
 PPKG is a "PowerPoint Karaoke" generator composing slide decks from up to three passed topics.'''),
         slide(f'''## Features
 
-PPKG generates slide decks with 10-20 slides (can be configured in the script). Possible slide types generated:
+PPKG generates slide decks. Possible slide types generated:
 
 {bullets(['Title slide', 'Motivation/key-argument slide (few words, maybe big background image?)', 'Agenda slide', 'Slide with lists and bullet points', 'Slide with lots of text', 'Slide with some chart, references, literature, links'])}'''),
         slide(f'''## Installation
