@@ -106,7 +106,7 @@ PPKG generates slide decks with 10-20 slides (can be configured in the script). 
 {bullets(['Title slide', 'Motivation/key-argument slide (few words, maybe big background image?)', 'Agenda slide', 'Slide with lists and bullet points', 'Slide with lots of text', 'Slide with some chart, references, literature, links'])}'''),
         slide(f'''## Installation
 
-{bullets(['Make sure you have Python 3 installed', 'Copy `ppkg` script to the directory you want to generate your slides in or', 'Put `ppkg` script on your PATH', 'Make sure the script is executable'], True)}
+{bullets(['Make sure you have Python 3 and requests installed', 'Copy `ppkg` script to the directory you want to generate your slides in or', 'Put `ppkg` script on your PATH', 'Make sure the script is executable'], True)}
 
 ```
 chmod +x ppkg
@@ -164,7 +164,23 @@ def generateChickenChickenChicken(topic):
     return meta_block + '\n' + slides
 
 def generatePresentation(topics):
-    return ''
+    title = ' '.join(topics)
+    meta_block = meta(title)
+    images = []
+    for topic in topics:
+        images.extend(get_image_urls_for_topic(topic))
+    print(len(images), file=sys.stderr)
+    slides = [
+        slide(intro(title)),
+        slide(quote(topic + '!', topic), False, False, RNG.image(images)),
+        slide(bullets(topics, True, True)),
+        slide(' '.join([RNG.choice(topics)] * 42)),
+        slide(image(RNG.piechart(topics))),
+        slide(bullets(topics)),
+        slide(f'## {RNG.choice(topics)}?', False, True, RNG.image(images))
+    ]
+    slides = '\n'.join(slides)
+    return meta_block + '\n' + slides
 
 def get_image_urls_for_topic(topic):
     if CONFIGURATION['pexels_api_key']:
