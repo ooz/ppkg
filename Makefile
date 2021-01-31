@@ -14,6 +14,7 @@ initEnv: ## Initializes the environment variables configuration file
 	@echo "  . env.list"
 
 demo: ## Generates some demo slide decks
+	./ppkg ppkg ppkg > README.md
 	./ppkg developers developers developers > developers.md
 	./ppkg bananas bananas bananas > bananas.md
 	./ppkg mango universe study > slides.md
