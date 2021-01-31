@@ -11,7 +11,7 @@ import time
 CONFIGURATION = {
     'theme': None,
     'transition': None,
-    'seed': int(time.time()),
+    'seed': None,
     'pexels_api_key': os.getenv('PEXELS_API_KEY', '').strip()
 }
 
@@ -192,6 +192,8 @@ def get_image_urls_for_topic(topic):
 class Rng(object):
     def __init__(self, seed):
         super().__init__()
+        if not seed:
+            seed = int(time.time())
         print(f'Seed: {seed}', file=sys.stderr)
         self.values = range(1000)
         self.rng = random.Random(seed)
