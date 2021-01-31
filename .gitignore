@@ -1,3 +1,4 @@
 env.list
 *.md
 !README.md
+*.pdf
