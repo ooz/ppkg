@@ -169,10 +169,9 @@ def generatePresentation(topics):
     images = []
     for topic in topics:
         images.extend(get_image_urls_for_topic(topic))
-    print(len(images), file=sys.stderr)
     slides = [
         slide(intro(title)),
-        slide(quote(topic + '!', topic), False, False, RNG.image(images)),
+        slide(quote(RNG.choice(topics) + '!', RNG.choice(topics), RNG.choice([''] + list([str(y) for y in range(1988, 2022)]))), False, False, RNG.image(images)),
         slide(bullets(topics, True, True)),
         slide(' '.join([RNG.choice(topics)] * 42)),
         slide(image(RNG.piechart(topics))),
@@ -200,7 +199,7 @@ class Rng(object):
         self.values = iter(self.values)
 
     def choice(self, seq):
-        random_index = int(next(self.values) * len(seq))
+        random_index = int(self.random() * len(seq))
         return seq[random_index]
 
     def image(self, images):
