@@ -169,9 +169,12 @@ def generatePresentation(topics):
     images = []
     for topic in topics:
         images.extend(get_image_urls_for_topic(topic))
+    quote_or_not = ''
+    if RNG.random() < 0.5:
+        quote_or_not = quote(RNG.choice(topics) + '!', RNG.choice(topics), RNG.choice([''] + list([str(y) for y in range(1988, 2022)])))
     slides = [
         slide(intro(title)),
-        slide(quote(RNG.choice(topics) + '!', RNG.choice(topics), RNG.choice([''] + list([str(y) for y in range(1988, 2022)]))), False, False, RNG.image(images)),
+        slide(quote_or_not, False, False, RNG.image(images)),
         slide(bullets(topics, True, True)),
         slide(' '.join([RNG.choice(topics)] * 42)),
         slide(image(RNG.piechart(topics))),
