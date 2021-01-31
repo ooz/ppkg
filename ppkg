@@ -83,6 +83,9 @@ def quote(content, author, year=''):
         year = f', {year}'
     return f'> "{content}" - {author}{year}'
 
+def image(url, alt=''):
+    return f'![{alt}]({url})'
+
 
 def generateReadmePresentation():
     title = 'Pompous Presentation Karaoke Generator'
@@ -147,10 +150,15 @@ def generateChickenChickenChicken(topic):
     title = [topic] * 3
     title = ' '.join(title)
     meta_block = meta(title)
+    images = get_image_urls_for_topic(topic)
     slides = [
         slide(intro(title)),
-        slide(quote(topic + '!', topic), False, False, get_image_url_for_topic(topic)),
-        slide(bullets([topic] * 5, True, True), False, True)
+        slide(quote(topic + '!', topic), False, False, RNG.image(images)),
+        slide(bullets([topic] * 5, True, True)),
+        slide(' '.join([topic] * 42)),
+        slide(image(RNG.piechart([topic] * 3))),
+        slide(f'## {topic}\n\n' + bullets([topic] * 3)),
+        slide(f'## {topic}?', False, True, RNG.image(images))
     ]
     slides = '\n'.join(slides)
     return meta_block + '\n' + slides
@@ -158,13 +166,13 @@ def generateChickenChickenChicken(topic):
 def generatePresentation(topics):
     return ''
 
-def get_image_url_for_topic(topic):
+def get_image_urls_for_topic(topic):
     if CONFIGURATION['pexels_api_key']:
         headers = {'Authorization': CONFIGURATION['pexels_api_key']}
         response = requests.get(f'https://api.pexels.com/v1/search?query={topic}', headers=headers)
         json = response.json()
-        return json['photos'][0]['src']['large']
-    return ''
+        return [photo['src']['large'] for photo in json['photos']]
+    return []
 
 class Rng(object):
     def __init__(self, seed):
@@ -178,6 +186,17 @@ class Rng(object):
     def choice(self, seq):
         random_index = int(next(self.values) * len(seq))
         return seq[random_index]
+
+    def image(self, images):
+        if images:
+            return self.choice(images)
+        return ''
+
+    def piechart(self, topics):
+        values = [str(int(self.random() * 1000)) for _ in topics]
+        values = ','.join(values)
+        labels = '|'.join(topics)
+        return f'''https://chart.googleapis.com/chart?cht=p3&chs=600x250&chd=t:{values}&chds=a&chl={labels}'''
 
     def random(self):
         value = next(self.values)

@@ -8,7 +8,12 @@ dockerRun: ## Run reveal-md in docker and present current directory
 	docker run --rm -p 1948:1948 -v $(shell pwd):/slides webpronl/reveal-md:latest
 
 initEnv: ## Initializes the environment variables configuration file
-	echo "PEXELS_API_KEY=\"\"" >> env.list
+	echo "export PEXELS_API_KEY=\"\"" >> env.list
 	@echo "Now configure the environment variables in env.list!"
 	@echo "Then run:"
 	@echo "  . env.list"
+
+demo: ## Generates some demo slide decks
+	./ppkg developers developers developers > developers.md
+	./ppkg bananas bananas bananas > bananas.md
+	./ppkg mango universe study > slides.md

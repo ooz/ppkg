@@ -1,1 +1,3 @@
 env.list
+*.md
+!README.md
