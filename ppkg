@@ -141,7 +141,11 @@ make dockerRun
         slide('''* **Fake News**: the generated presentations are fake, disinformation and full of bullshit!
 * **On the safe side**: made Corona-safe, alone!
 * **A-Party**: yes, you can have a PPK during a video call!
-* **Next Slide Please**: the game is a presentation!''', False, True)
+* **Next Slide Please**: the game is a presentation!'''),
+        slide('## Screenshots\n\n' + image('screenshots/screen0.png'), True),
+        slide(image('screenshots/screen1.png'), True),
+        slide(image('screenshots/screen2.png'), True),
+        slide(image('screenshots/screen3.png'), False, True),
     ]
     slides = '\n'.join(slides)
     return meta_block + '\n' + slides

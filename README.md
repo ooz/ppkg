@@ -88,6 +88,24 @@ make dockerRun
 * **A-Party**: yes, you can have a PPK during a video call!
 * **Next Slide Please**: the game is a presentation!
 
+<!--s-->
+
+## Screenshots
+
+![](screenshots/screen0.png)
+
+<!--v-->
+
+![](screenshots/screen1.png)
+
+<!--v-->
+
+![](screenshots/screen2.png)
+
+<!--v-->
+
+![](screenshots/screen3.png)
+
 <style>
 .reveal .slidebackground {
   background: no-repeat center center fixed;
