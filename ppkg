@@ -3,6 +3,7 @@
 
 import os
 import random
+import requests
 import sys
 import time
 
@@ -11,7 +12,7 @@ CONFIGURATION = {
     'theme': None,
     'transition': None,
     'seed': int(time.time()),
-    'pexels_api_key': os.getenv('PEXELS_API_KEY', '')
+    'pexels_api_key': os.getenv('PEXELS_API_KEY', '').strip()
 }
 
 EXTRA_STYLE = '''
@@ -48,10 +49,12 @@ revealOptions:
 ---
 '''
 
-def slide(content, vertical=False, last=False):
+def slide(content, vertical=False, last=False, background=''):
+    if background:
+        background = f'<!-- .slide: class="slidebackground" data-background="{background}" -->\n'
     slide_type = 'v' if vertical else 's'
     slide_type = '' if last else f'<!--{slide_type}-->'
-    s = f'''{content}
+    s = f'''{background}{content}
 
 {slide_type}
 '''
@@ -74,6 +77,11 @@ def intro(title, slogan=None, author_coordinates=None):
 f'''# {title}
 
 {lower_part}'''.strip()
+
+def quote(content, author, year=''):
+    if year:
+        year = f', {year}'
+    return f'> "{content}" - {author}{year}'
 
 
 def generateReadmePresentation():
@@ -141,12 +149,21 @@ def generateChickenChickenChicken(topic):
     meta_block = meta(title)
     slides = [
         slide(intro(title)),
-        slide(bullets([topic] * 5, True, True))
+        slide(quote(topic + '!', topic), False, False, get_image_url_for_topic(topic)),
+        slide(bullets([topic] * 5, True, True), False, True)
     ]
     slides = '\n'.join(slides)
     return meta_block + '\n' + slides
 
 def generatePresentation(topics):
+    return ''
+
+def get_image_url_for_topic(topic):
+    if CONFIGURATION['pexels_api_key']:
+        headers = {'Authorization': CONFIGURATION['pexels_api_key']}
+        response = requests.get(f'https://api.pexels.com/v1/search?query={topic}', headers=headers)
+        json = response.json()
+        return json['photos'][0]['src']['large']
     return ''
 
 class Rng(object):
